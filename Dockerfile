@@ -1,8 +1,9 @@
-FROM postgres:10
+FROM postgres:13.1
 
 RUN apt-get update && apt-get -y install pgagent
 
 COPY create_extension.sh /docker-entrypoint-initdb.d
+COPY src/model.sql /docker-entrypoint-initdb.d
 COPY entrypoint.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/entrypoint.sh \
