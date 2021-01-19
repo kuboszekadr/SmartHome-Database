@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # Start the agent process
-
-
 /usr/bin/pgagent dbname=postgres user="$POSTGRES_USER"
 status=$?
 if [ $status -ne 0 ]; then
@@ -34,3 +32,4 @@ while sleep 60; do
     exit 1
   fi
 done
+

@@ -1,9 +1,76 @@
 --
+-- PostgreSQL database cluster dump
+--
+
+-- Started on 2021-01-19 21:06:32
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE postgres;
+ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'md53175bce1d3201d16594cebf9d7eb3f9d';
+
+
+
+
+
+
+--
+-- Databases
+--
+
+--
+-- Database "template1" dump
+--
+
+\connect template1
+
+--
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.9
--- Dumped by pg_dump version 12.4
+-- Dumped from database version 11.5 (Raspbian 11.5-1+deb10u1)
+-- Dumped by pg_dump version 13.1
+
+-- Started on 2021-01-19 21:06:33
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+-- Completed on 2021-01-19 21:06:35
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "postgres" dump
+--
+
+\connect postgres
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.5 (Raspbian 11.5-1+deb10u1)
+-- Dumped by pg_dump version 13.1
+
+-- Started on 2021-01-19 21:06:35
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,10 +84,77 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- TOC entry 9 (class 2615 OID 49194)
+-- Name: pgagent; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA pgagent;
+
+
+ALTER SCHEMA pgagent OWNER TO postgres;
+
+--
+-- TOC entry 3037 (class 0 OID 0)
+-- Dependencies: 9
+-- Name: SCHEMA pgagent; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA pgagent IS 'pgAgent system tables';
+
+
+--
+-- TOC entry 2 (class 3079 OID 49195)
+-- Name: pgagent; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pgagent WITH SCHEMA pgagent;
+
+
+--
+-- TOC entry 3038 (class 0 OID 0)
+-- Dependencies: 2
+-- Name: EXTENSION pgagent; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION pgagent IS 'A PostgreSQL job scheduler';
+
+
+-- Completed on 2021-01-19 21:06:38
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "smart_home" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.5 (Raspbian 11.5-1+deb10u1)
+-- Dumped by pg_dump version 13.1
+
+-- Started on 2021-01-19 21:06:39
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3148 (class 1262 OID 49371)
 -- Name: smart_home; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE smart_home WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8';
+CREATE DATABASE smart_home WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
 
 
 ALTER DATABASE smart_home OWNER TO postgres;
@@ -39,6 +173,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- TOC entry 31 (class 2615 OID 49372)
 -- Name: front_end; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -48,6 +183,43 @@ CREATE SCHEMA front_end;
 ALTER SCHEMA front_end OWNER TO postgres;
 
 --
+-- TOC entry 46 (class 2615 OID 49690)
+-- Name: pgagent; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA pgagent;
+
+
+ALTER SCHEMA pgagent OWNER TO postgres;
+
+--
+-- TOC entry 3149 (class 0 OID 0)
+-- Dependencies: 46
+-- Name: SCHEMA pgagent; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA pgagent IS 'pgAgent system tables';
+
+
+--
+-- TOC entry 2 (class 3079 OID 49691)
+-- Name: pgagent; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pgagent WITH SCHEMA pgagent;
+
+
+--
+-- TOC entry 3150 (class 0 OID 0)
+-- Dependencies: 2
+-- Name: EXTENSION pgagent; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION pgagent IS 'A PostgreSQL job scheduler';
+
+
+--
+-- TOC entry 284 (class 1255 OID 49373)
 -- Name: p_reading_populate(); Type: PROCEDURE; Schema: front_end; Owner: postgres
 --
 
@@ -122,6 +294,7 @@ ALTER PROCEDURE front_end.p_reading_populate() OWNER TO postgres;
 SET default_tablespace = '';
 
 --
+-- TOC entry 235 (class 1259 OID 49374)
 -- Name: reading; Type: TABLE; Schema: front_end; Owner: postgres
 --
 
@@ -141,6 +314,7 @@ CREATE TABLE front_end.reading (
 ALTER TABLE front_end.reading OWNER TO postgres;
 
 --
+-- TOC entry 236 (class 1259 OID 49381)
 -- Name: d_device; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -154,6 +328,7 @@ CREATE TABLE public.d_device (
 ALTER TABLE public.d_device OWNER TO postgres;
 
 --
+-- TOC entry 237 (class 1259 OID 49388)
 -- Name: d_device_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -169,6 +344,8 @@ CREATE SEQUENCE public.d_device_id_seq
 ALTER TABLE public.d_device_id_seq OWNER TO postgres;
 
 --
+-- TOC entry 3151 (class 0 OID 0)
+-- Dependencies: 237
 -- Name: d_device_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -176,6 +353,7 @@ ALTER SEQUENCE public.d_device_id_seq OWNED BY public.d_device.device_id;
 
 
 --
+-- TOC entry 238 (class 1259 OID 49390)
 -- Name: d_measure; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -189,6 +367,7 @@ CREATE TABLE public.d_measure (
 ALTER TABLE public.d_measure OWNER TO postgres;
 
 --
+-- TOC entry 239 (class 1259 OID 49397)
 -- Name: d_program; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -202,6 +381,7 @@ CREATE TABLE public.d_program (
 ALTER TABLE public.d_program OWNER TO postgres;
 
 --
+-- TOC entry 240 (class 1259 OID 49401)
 -- Name: d_program_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -217,6 +397,8 @@ CREATE SEQUENCE public.d_program_id_seq
 ALTER TABLE public.d_program_id_seq OWNER TO postgres;
 
 --
+-- TOC entry 3152 (class 0 OID 0)
+-- Dependencies: 240
 -- Name: d_program_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -224,6 +406,7 @@ ALTER SEQUENCE public.d_program_id_seq OWNED BY public.d_program.id;
 
 
 --
+-- TOC entry 241 (class 1259 OID 49403)
 -- Name: d_sensor; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -238,6 +421,7 @@ CREATE TABLE public.d_sensor (
 ALTER TABLE public.d_sensor OWNER TO postgres;
 
 --
+-- TOC entry 242 (class 1259 OID 49410)
 -- Name: d_sensor_sensor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -253,6 +437,8 @@ CREATE SEQUENCE public.d_sensor_sensor_id_seq
 ALTER TABLE public.d_sensor_sensor_id_seq OWNER TO postgres;
 
 --
+-- TOC entry 3153 (class 0 OID 0)
+-- Dependencies: 242
 -- Name: d_sensor_sensor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -260,6 +446,7 @@ ALTER SEQUENCE public.d_sensor_sensor_id_seq OWNED BY public.d_sensor.sensor_id;
 
 
 --
+-- TOC entry 243 (class 1259 OID 49412)
 -- Name: device2sensor; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -275,6 +462,7 @@ CREATE TABLE public.device2sensor (
 ALTER TABLE public.device2sensor OWNER TO postgres;
 
 --
+-- TOC entry 244 (class 1259 OID 49419)
 -- Name: device_sensor; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -293,6 +481,7 @@ CREATE VIEW public.device_sensor AS
 ALTER TABLE public.device_sensor OWNER TO postgres;
 
 --
+-- TOC entry 245 (class 1259 OID 49423)
 -- Name: device_sensor_measure; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -322,6 +511,7 @@ CREATE VIEW public.device_sensor_measure AS
 ALTER TABLE public.device_sensor_measure OWNER TO postgres;
 
 --
+-- TOC entry 246 (class 1259 OID 49428)
 -- Name: program_runtime; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -339,6 +529,7 @@ CREATE TABLE public.program_runtime (
 ALTER TABLE public.program_runtime OWNER TO postgres;
 
 --
+-- TOC entry 247 (class 1259 OID 49432)
 -- Name: program_runtime_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -354,6 +545,8 @@ CREATE SEQUENCE public.program_runtime_id_seq
 ALTER TABLE public.program_runtime_id_seq OWNER TO postgres;
 
 --
+-- TOC entry 3154 (class 0 OID 0)
+-- Dependencies: 247
 -- Name: program_runtime_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -361,6 +554,7 @@ ALTER SEQUENCE public.program_runtime_id_seq OWNED BY public.program_runtime.id;
 
 
 --
+-- TOC entry 248 (class 1259 OID 49434)
 -- Name: reading; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -378,6 +572,7 @@ CREATE TABLE public.reading (
 ALTER TABLE public.reading OWNER TO postgres;
 
 --
+-- TOC entry 249 (class 1259 OID 49438)
 -- Name: reading_reading_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -393,6 +588,8 @@ CREATE SEQUENCE public.reading_reading_id_seq
 ALTER TABLE public.reading_reading_id_seq OWNER TO postgres;
 
 --
+-- TOC entry 3155 (class 0 OID 0)
+-- Dependencies: 249
 -- Name: reading_reading_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -400,6 +597,7 @@ ALTER SEQUENCE public.reading_reading_id_seq OWNED BY public.reading.reading_id;
 
 
 --
+-- TOC entry 250 (class 1259 OID 49440)
 -- Name: sensor2device_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -415,6 +613,8 @@ CREATE SEQUENCE public.sensor2device_id_seq
 ALTER TABLE public.sensor2device_id_seq OWNER TO postgres;
 
 --
+-- TOC entry 3156 (class 0 OID 0)
+-- Dependencies: 250
 -- Name: sensor2device_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -422,6 +622,7 @@ ALTER SEQUENCE public.sensor2device_id_seq OWNED BY public.device2sensor.id;
 
 
 --
+-- TOC entry 2934 (class 2604 OID 49442)
 -- Name: d_device device_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -429,6 +630,7 @@ ALTER TABLE ONLY public.d_device ALTER COLUMN device_id SET DEFAULT nextval('pub
 
 
 --
+-- TOC entry 2937 (class 2604 OID 49443)
 -- Name: d_program id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -436,6 +638,7 @@ ALTER TABLE ONLY public.d_program ALTER COLUMN id SET DEFAULT nextval('public.d_
 
 
 --
+-- TOC entry 2939 (class 2604 OID 49444)
 -- Name: d_sensor sensor_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -443,6 +646,7 @@ ALTER TABLE ONLY public.d_sensor ALTER COLUMN sensor_id SET DEFAULT nextval('pub
 
 
 --
+-- TOC entry 2941 (class 2604 OID 49445)
 -- Name: device2sensor id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -450,6 +654,7 @@ ALTER TABLE ONLY public.device2sensor ALTER COLUMN id SET DEFAULT nextval('publi
 
 
 --
+-- TOC entry 2943 (class 2604 OID 49446)
 -- Name: program_runtime id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -457,6 +662,7 @@ ALTER TABLE ONLY public.program_runtime ALTER COLUMN id SET DEFAULT nextval('pub
 
 
 --
+-- TOC entry 2945 (class 2604 OID 49447)
 -- Name: reading reading_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -464,6 +670,7 @@ ALTER TABLE ONLY public.reading ALTER COLUMN reading_id SET DEFAULT nextval('pub
 
 
 --
+-- TOC entry 2988 (class 2606 OID 49449)
 -- Name: d_device d_device_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -472,6 +679,7 @@ ALTER TABLE ONLY public.d_device
 
 
 --
+-- TOC entry 2990 (class 2606 OID 49451)
 -- Name: d_measure d_measure_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -480,6 +688,7 @@ ALTER TABLE ONLY public.d_measure
 
 
 --
+-- TOC entry 2992 (class 2606 OID 49453)
 -- Name: d_sensor d_sensor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -488,6 +697,7 @@ ALTER TABLE ONLY public.d_sensor
 
 
 --
+-- TOC entry 2994 (class 2606 OID 49455)
 -- Name: device2sensor sensor2device_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -496,6 +706,7 @@ ALTER TABLE ONLY public.device2sensor
 
 
 --
+-- TOC entry 3018 (class 2606 OID 49456)
 -- Name: device2sensor sensor2device_device_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -504,6 +715,7 @@ ALTER TABLE ONLY public.device2sensor
 
 
 --
+-- TOC entry 3019 (class 2606 OID 49461)
 -- Name: device2sensor sensor2device_sensor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -511,7 +723,15 @@ ALTER TABLE ONLY public.device2sensor
     ADD CONSTRAINT sensor2device_sensor_id_fkey FOREIGN KEY (sensor_id) REFERENCES public.d_sensor(sensor_id);
 
 
+-- Completed on 2021-01-19 21:06:43
+
 --
 -- PostgreSQL database dump complete
+--
+
+-- Completed on 2021-01-19 21:06:43
+
+--
+-- PostgreSQL database cluster dump complete
 --
 
