@@ -1,15 +1,22 @@
-FROM postgres:13.1
-
-RUN apt-get update && apt-get -y install pgagent
+FROM debian:10.9
 
 COPY src/model.sql src/model.sql
-COPY src/data.sql src/data.sql
 
-COPY create_extension.sh /docker-entrypoint-initdb.d
-COPY entrypoint.sh /usr/local/bin/
+# install necesary packages
+RUN apt-get update &&\
+    apt-get install -y postgresql-11 &&\
+    apt-get install -y pgagent
 
-RUN chmod +x /usr/local/bin/entrypoint.sh \
-    && ln -s /usr/local/bin/entrypoint.sh /
+# allow external connections
+RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/11/main/pg_hba.conf
+RUN echo "host all  all    ::/0  md5" >> /etc/postgresql/11/main/pg_hba.conf
+RUN echo "listen_addresses='*'" >> /etc/postgresql/11/main/postgresql.conf
 
-ENTRYPOINT ["entrypoint.sh"]
-CMD ["postgres"]
+# switch to postgres user and alter password
+USER postgres
+RUN /etc/init.d/postgresql start &&\
+    psql -c "ALTER USER postgres WITH PASSWORD 'postgres'"&&\
+    psql -f src/model.sql -U "postgres"
+
+EXPOSE 5432
+CMD ["/usr/lib/postgresql/11/bin/postgres", "-D", "/var/lib/postgresql/11/main", "-c", "config_file=/etc/postgresql/11/main/postgresql.conf"]

@@ -136,7 +136,7 @@ SET row_security = off;
 -- Name: smart_home; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE smart_home WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
+CREATE DATABASE smart_home WITH TEMPLATE = template0 ENCODING = 'UTF8';
 
 
 ALTER DATABASE smart_home OWNER TO postgres;
