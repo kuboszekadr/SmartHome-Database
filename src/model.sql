@@ -310,7 +310,7 @@ CREATE PROCEDURE public.populate_reading()
     LANGUAGE sql
     AS $$
 insert into public.reading (sensor_id, reading_value, measure_id, reading_timestamp, device_id)
-select 
+select distinct
     s.*
 from 
         stg.reading as s
